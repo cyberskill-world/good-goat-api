@@ -1,0 +1,23 @@
+type Type_Response_Auth {
+    success: Boolean!
+    message: String
+    token: String
+}
+
+type Query {
+    checkAuth(token: String): Type_Response_Auth!
+}
+
+type Mutation {
+    register(fullName: String!, email: String!, password: String!, phone: String): Type_Response_Auth!
+    login(identity: String!, password: String!, rememberMe: Boolean): Type_Response_Auth!
+    logout: Type_Response_Auth!
+    requestPasswordReset(identityType: String!, identity: String!): Type_Response_Auth!
+    changePassword(
+        identityType: String!
+        identity: String!
+        oldPassword: String!
+        newPassword: String!
+        confirmNewPassword: String!
+    ): Type_Response_Auth!
+}

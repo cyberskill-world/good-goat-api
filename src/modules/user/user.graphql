@@ -1,0 +1,57 @@
+type Type_User {
+    id: String
+    fullName: String
+    email: String
+    phone: String
+    isDel: Boolean
+    createdAt: DateTime
+    updatedAt: DateTime
+}
+
+input Input_Type_User {
+    id: String
+    fullName: String
+    email: String
+    phone: String
+    isDel: Boolean
+    createdAt: DateTime
+    updatedAt: DateTime
+}
+
+type Type_Response_User {
+    success: Boolean!
+    message: String
+    result: Type_User
+}
+
+type Type_Users {
+    docs: [Type_User]!
+    totalDocs: Int!
+    limit: Int!
+    hasPrevPage: Boolean!
+    hasNextPage: Boolean!
+    page: Int
+    totalPages: Int!
+    offset: Int!
+    prevPage: Int
+    nextPage: Int
+    pagingCounter: Int!
+    meta: JSON
+}
+
+type Type_Response_Users {
+    success: Boolean!
+    message: String
+    result: Type_Users
+}
+
+type Query {
+    getUser(filter: JSON!, projection: JSON, options: JSON, populate: JSON): Type_Response_User!
+    getUsers(filter: JSON, options: JSON): Type_Response_Users!
+}
+
+type Mutation {
+    createUser(doc: JSON!): Type_Response_User!
+    updateUser(filter: JSON!, update: JSON!, options: JSON): Type_Response_User!
+    deleteUser(filter: JSON!, options: JSON): Type_Response_User!
+}
