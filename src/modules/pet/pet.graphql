@@ -1,0 +1,71 @@
+type Type_Pet {
+    name: String
+    skills: String
+    model_pet: JSON
+}
+
+type Type_Pets {
+    docs: [Type_Pet]!
+    totalDocs: Int!
+    limit: Int!
+    hasPrevPage: Boolean!
+    hasNextPage: Boolean!
+    page: Int
+    totalPages: Int!
+    offset: Int!
+    prevPage: Int
+    nextPage: Int
+    pagingCounter: Int!
+    meta: JSON
+}
+
+type Type_Response_Pet {
+    success: Boolean!
+    message: String
+    result: Type_Pet
+}
+
+type Type_Response_Pets {
+    success: Boolean!
+    message: String
+    result: Type_Pets
+}
+
+input Input_Create_Pet {
+    name: String!
+    skills: String!
+    model_pet: JSON!
+}
+
+input Input_Update_Pet {
+    id: ID!
+    name: String
+    skills: String
+    model_pet: JSON
+}
+
+input Input_Delete_Pet {
+    id: ID!
+}
+
+input Input_Get_Pet {
+    id: ID!
+}
+
+input Input_Get_Pets {
+    limit: Int
+    page: Int
+    sort: JSON
+    filter: JSON
+}
+
+type Query {
+    getPet(filter: Input_Get_Pet!, projection: JSON, options: JSON, populate: JSON): Type_Response_Pet!
+    getPets(filter: Input_Get_Pets, options: JSON): Type_Response_Pets!
+}
+
+type Mutation {
+    createPet(doc: Input_Create_Pet!): Type_Response_Pet!
+    updatePet(filter: Input_Update_Pet!, update: Input_Update_Pet!, options: JSON): Type_Response_Pet!
+    deletePet(filter: Input_Delete_Pet!, options: JSON): Type_Response_Pet!
+}

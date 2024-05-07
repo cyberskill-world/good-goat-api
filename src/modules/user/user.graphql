@@ -1,27 +1,69 @@
 type Type_User {
     id: String
-    fullName: String
+    displayName: String
+    password: String
     email: String
     phone: String
+    googleId: Int
+    facebookId: Int
+    score: Int
+    coin: Int
+    diamond: Int
+    settings: JSON
+    avatar: String
     isDel: Boolean
     createdAt: DateTime
     updatedAt: DateTime
 }
 
-input Input_Type_User {
-    id: String
-    fullName: String
+# Tạo kiểu đầu vào cho thao tác tạo mới
+input Input_Create_User {
+    displayName: String
+    password: String
     email: String
     phone: String
+    googleId: Int
+    facebookId: Int
+    score: Int
+    coin: Int
+    diamond: Int
+    settings: JSON
+    avatar: String
     isDel: Boolean
-    createdAt: DateTime
-    updatedAt: DateTime
 }
 
-type Type_Response_User {
-    success: Boolean!
-    message: String
-    result: Type_User
+# Tạo kiểu đầu vào cho thao tác đọc
+input Input_Get_User {
+    id: ID!
+}
+
+input Input_Get_Users {
+    limit: Int
+    page: Int
+    sort: JSON
+    filter: JSON
+}
+
+# Tạo kiểu đầu vào cho thao tác cập nhật
+input Input_Update_User {
+    id: ID!
+    displayName: String
+    password: String
+    email: String
+    phone: String
+    googleId: Int
+    facebookId: Int
+    score: Int
+    coin: Int
+    diamond: Int
+    settings: JSON
+    avatar: String
+    isDel: Boolean
+}
+
+# Tạo kiểu đầu vào cho thao tác xóa
+input Input_Delete_User {
+    id: ID!
 }
 
 type Type_Users {
@@ -39,6 +81,12 @@ type Type_Users {
     meta: JSON
 }
 
+type Type_Response_User {
+    success: Boolean!
+    message: String
+    result: Type_User
+}
+
 type Type_Response_Users {
     success: Boolean!
     message: String
@@ -46,12 +94,12 @@ type Type_Response_Users {
 }
 
 type Query {
-    getUser(filter: JSON!, projection: JSON, options: JSON, populate: JSON): Type_Response_User!
-    getUsers(filter: JSON, options: JSON): Type_Response_Users!
+    getUser(filter: Input_Get_User!, projection: JSON, options: JSON, populate: JSON): Type_Response_User!
+    getUsers(filter: Input_Get_Users, options: JSON): Type_Response_Users!
 }
 
 type Mutation {
-    createUser(doc: JSON!): Type_Response_User!
-    updateUser(filter: JSON!, update: JSON!, options: JSON): Type_Response_User!
-    deleteUser(filter: JSON!, options: JSON): Type_Response_User!
+    createUser(doc: Input_Create_User!): Type_Response_User!
+    updateUser(doc: Input_Update_User!): Type_Response_User!
+    deleteUser(filter: Input_Delete_User!): Type_Response_User!
 }

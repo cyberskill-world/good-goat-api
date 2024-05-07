@@ -7,7 +7,7 @@ import { I_UserVerification } from './user-verification.types';
 
 export const UserVerificationModel = generateModel<I_UserVerification>({
     mongoose,
-    name: config.DATABASE_COLLECTIONS.USER_VERIFICATION,
+    name: config.DATABASE_COLLECTIONS.USER_VERIFICATIONS,
     schema: {
         identity: {
             type: String,

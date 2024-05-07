@@ -19,6 +19,7 @@ export interface I_Input_Login {
 }
 
 export interface I_Input_Register {
+    displayName: string;
     fullName: string;
     email: string;
     password: string;

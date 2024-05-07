@@ -33,23 +33,45 @@ export const userCtr: I_UserCtr = {
     getUsers: async (_, filter, options) => {
         return mongooseCtr.findPaging(filter, options);
     },
-    createUser: async (req, doc) => {
-        const { email, password, ...rest } = doc;
+    // createUser: async (req, doc) => {
+    //     // const { email, password, ...rest } = doc;
+    //     const { email, ...rest } = doc;
 
-        const userFound = await userCtr.getUser(req, {
-            email,
-        });
+    //     const userFound = await userCtr.getUser(req, {
+    //         email,
+    //     });
 
-        if (userFound.success) {
-            throwResponse({
-                message: 'Người dùng đã tồn tại.',
-                status: RESPONSE_STATUS.BAD_REQUEST,
-            });
-        }
+    //     if (userFound.success) {
+    //         throwResponse({
+    //             message: 'Người dùng đã tồn tại.',
+    //             status: RESPONSE_STATUS.BAD_REQUEST,
+    //         });
+    //     }
 
+    //     /* const userCreated = await mongooseCtr.createOne({
+    //         email,
+    //         password: bcrypt.hashSync(password, 10),
+    //         ...rest,
+    //     }); */
+    //     const userCreated = await mongooseCtr.createOne({
+    //         email,
+    //         ...rest,
+    //     });
+
+    //     if (!userCreated.success) {
+    //         throwResponse({
+    //             message: userCreated.message,
+    //         });
+    //     }
+
+    //     return userCreated;
+    // },
+    createUser: async (reg, { email, displayName, password, ...rest }) => {
+        // Your existing logic here
         const userCreated = await mongooseCtr.createOne({
             email,
             password: bcrypt.hashSync(password, 10),
+            displayName,
             ...rest,
         });
 
@@ -61,6 +83,7 @@ export const userCtr: I_UserCtr = {
 
         return userCreated;
     },
+
     updateUser: async (req, filter, update, options) => {
         const userFound = await userCtr.getUser(req, filter);
 
@@ -70,7 +93,15 @@ export const userCtr: I_UserCtr = {
             });
         }
 
-        return mongooseCtr.updateOne(filter, update, options);
+        const userUpdated = await mongooseCtr.updateOne(filter, update, options);
+
+        if (!userUpdated.success) {
+            throwResponse({
+                message: userUpdated.message,
+            });
+        }
+
+        return userUpdated;
     },
     deleteUser: async (req, filter, options) => {
         const userFound = await userCtr.getUser(req, filter);

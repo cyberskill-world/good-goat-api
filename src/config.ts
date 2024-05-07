@@ -22,8 +22,23 @@ interface I_SessionConfig {
 }
 
 interface I_DatabaseCollections {
-    USER: string;
-    USER_VERIFICATION: string;
+    /* USER */
+    USERS: string;
+    USER_VERIFICATIONS: string;
+    USER_LEVELS: string;
+    USER_PETS: string;
+    /* PET */
+    PETS: string;
+    PET_LEVELS: string;
+    RARITIES: string;
+    /* EXCERCISE */
+    EXERCISES: string;
+    USER_EXERCISES: string;
+    TOPICS: string;
+    QUESTIONS: string;
+    /* ORTHER */
+    NEWS: string;
+    EVENTS: string;
 }
 
 interface I_Config {
@@ -91,8 +106,19 @@ const config: I_Config = {
     SECRET: process.env.SECRET || 'ixN0-Vqnj9JAQzE(u*Z59xj#8ZKujr%w', // 32 chars required
     UPLOAD_FOLDER: process.env.UPLOAD_FOLDER || 'bixso',
     DATABASE_COLLECTIONS: {
-        USER: process.env.USER_COLLECTION_NAME || 'users',
-        USER_VERIFICATION: process.env.USER_VERIFICATION_COLLECTION_NAME || 'user-verifications',
+        USERS: process.env.USER_COLLECTION_NAME || 'users',
+        PETS: process.env.PETS_COLLECTION_NAME || 'pets',
+        USER_VERIFICATIONS: process.env.USER_VERIFICATION_COLLECTION_NAME || 'user-verifications',
+        USER_LEVELS: process.env.USER_LEVELS_COLLECTION_NAME || 'user-levels',
+        USER_PETS: process.env.USER_PETS_COLLECTION_NAME || 'user-pets',
+        PET_LEVELS: process.env.PET_LEVELS_COLLECTION_NAME || 'pet-levels',
+        RARITIES: process.env.RARITY_COLLECTION_NAME || 'rarities',
+        EXERCISES: process.env.EXERCISE_COLLECTION_NAME || 'exercises',
+        USER_EXERCISES: process.env.USER_EXERCISES_COLLECTION_NAME || 'user-exercises',
+        TOPICS: process.env.TOPIC_COLLECTION_NAME || 'topics',
+        QUESTIONS: process.env.QUESTION_COLLECTION_NAME || 'questions',
+        NEWS: process.env.NEWS_COLLECTION_NAME || 'news',
+        EVENTS: process.env.EVENT_COLLECTION_NAME || 'events',
     },
     SMS: {
         TWILIO: {

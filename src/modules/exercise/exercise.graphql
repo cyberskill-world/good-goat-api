@@ -1,0 +1,55 @@
+enum Enumerator {
+    EASY
+    MEDIUM
+    HARD
+}
+
+type Type_Exercise {
+    id: String
+    name: String
+    skill_type: Enumerator
+    topic_id: String
+    question_id: String
+    level: Enumerator
+    score: Int!
+    coin: Int!
+    user_id: String!
+}
+
+type Type_Exercises {
+    docs: [Type_Exercise]!
+    totalDocs: Int!
+    limit: Int!
+    hasPrevPage: Boolean!
+    hasNextPage: Boolean!
+    page: Int
+    totalPages: Int!
+    offset: Int!
+    prevPage: Int
+    nextPage: Int
+    pagingCounter: Int!
+    meta: JSON
+}
+
+type Type_Response_Exercise {
+    success: Boolean!
+    message: String
+    result: Type_Exercise
+}
+
+type Type_Response_Exercises {
+    success: Boolean!
+    message: String
+    result: Type_Exercises
+}
+
+type Query {
+    getExercise(filter: JSON!, projection: JSON, options: JSON, populate: JSON): Type_Response_Exercise!
+    getExercises(filter: JSON, options: JSON): Type_Response_Exercises!
+}
+
+type Mutation {
+    createExercise(doc: JSON!): Type_Response_Exercise!
+    updateExercise(filter: JSON!, update: JSON!, options: JSON): Type_Response_Exercise!
+    deleteExercise(filter: JSON!, options: JSON): Type_Response_Pet!
+}
